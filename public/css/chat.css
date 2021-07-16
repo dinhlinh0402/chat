@@ -1,0 +1,46 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font: 13px helvetica, arial;
+}
+
+form {
+    background: #000;
+    padding: 2px;
+    position: fixed;
+    bottom: 10px;
+    width: 72%;
+}
+
+form input {
+    border: 0;
+    padding: 10px 10px;
+    width: 85%;
+    margin-right: 20px;
+    /* padding-top:20px */
+    /* margin-bottom:10px; */
+}
+
+form button {
+    width: 10%;
+    
+}
+
+#conversation {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    border: 1px solid gray;
+}
+
+#conversation li {
+    padding: 5px 10px;
+}
+
+#conversation li:nth-child(odd) {
+    background: #eee;
+}

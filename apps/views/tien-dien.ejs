@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tính tiền điện</title>
+    <style>
+        .wrapper {
+            max-width: 500px;
+            margin: 100px auto;
+            border: 1px solid gray;
+            border-radius: 10px;
+            /* text-align: center; */
+            padding: 30px
+        }
+        input {
+            padding: 5px 15px;
+            border: 1px solid gray;
+            border-radius: 10px;
+        }
+        input:focus {
+            outline: none;
+        }
+        h1 {
+            text-align: center;
+            color: green;
+        }
+        .btn-tinh {
+            width: 60px;
+            height: 25px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .label {
+            padding-top:20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+            <h1>Tính tiền điện của bạn</h1>
+            <label for="input">Số điện của bạn: </label>
+            <input type="text" id="input" name="input" placeholder="Tính theo kW">
+            <button class="btn-tinh">Tính</button>
+            <div class="label">
+                <label hidden class="result" for="result">test</label>
+            </div>
+    </div>
+
+    <script>
+        const btn_tinh = document.querySelector('.btn-tinh');
+        const result = document.querySelector('.result');
+
+        btn_tinh.onclick = function(){
+            const soDien = document.querySelector('input[name="input"]').value;
+            result.removeAttribute('hidden');
+            ktra(soDien);
+        }
+
+        function ktra(soDien) {
+            const soDienConv = parseInt(soDien);
+            // console.log(soDienConv);
+            if( isNaN(soDienConv)) {
+                result.innerHTML = 'Số điện phải là số, không được sử dụng ký tự!!';
+            } else {
+                var tongTien = tinhTienDien(soDien);
+                result.innerHTML = `Số điện bạn phải trả là: ${tongTien}`; 
+            }
+        }
+        
+        function tinhTienDien(soDien) {
+            var tongTien = 0;
+            var bac1 = 1678, bac2 = 1734, bac3 = 2014, bac4 = 2536, bac5 = 2834, bac6 = 2927;
+            if(soDien >= 0 && soDien <= 50 ) {
+                tongTien += soDien * bac1;
+            } else if (soDien >= 51 && soDien <= 100) {
+                tongTien += 50 * bac1 + (soDien - 50 ) * bac2;
+            } else if (soDien >= 101 && soDien <= 200 ) {
+                tongTien += 50 * bac1 + 50 * bac2 + (soDien - 100) * bac3;
+            } else if (soDien >= 201 && soDien <= 300 ) {
+                tongTien += 50 * bac1 + 50 * bac2 + 100 * bac3 + (soDien - 200) * bac4;
+            } else if (soDien >= 301 && soDien <= 400 ) {
+                tongTien += 50 * bac1 + 50 * bac2 + 100 * bac3 + 100 * bac4 + (soDien - 300) * bac5;
+            } else if (soDien >= 401) {
+                tongTien += 50 * bac1 + 50 * bac2 + 100 * bac3 + 100 * bac4 + 100 * bac5 + (soDien - 400) * bac6;
+            } 
+            tongTien += tongTien/100*10;
+            return Math.floor(tongTien);
+        }
+    </script>
+</body>
+</html>
